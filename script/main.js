@@ -36,4 +36,23 @@ function getRoomId()
         //Redirect to home page
         window.location.href = "index.html";
     }
+    else
+    {
+        var RoomRef = firestore.collection("rooms").doc(room_id);
+
+        RoomRef.get().then((doc) => {
+            if (!doc.exists) {
+                //Redirect to home page if room doesnt exist
+                window.location.href = "index.html";
+            }
+            else
+            {
+                return room_id;
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+    }
+
+    return "";
 }
