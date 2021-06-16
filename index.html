@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap-4.5.3-dist/css/bootstrap.min.css">
+    <script src="bootstrap-4.5.3-dist/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
+    <script src="fontawesome-free-5.15.1-web/js/all.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/home.css">
+
+    <title>Firebase Video Chat App</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <a class="navbar-brand" href="index.html"><i class="fas fa-video"></i> Video Chat App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <div id="check-signin">
+                <a href="login.html" class="text-decoration-none text-dark"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+            </div>
+          </form>
+        </div>
+    </nav>
+
+    <div class="banner-container">
+      <div class="row">
+        <div class="col-sm-12 col-lg-6">
+          <div class="banner-container-1">
+            <div class="home-title">
+              <h1>Secure video conference for everyone</h1>
+              <h5 class="text-secondary mt-2">Connect, collaborate and celebrate from anywhere with video chat app</h5>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-input-1">
+                  <button class="btn btn-primary text-white mt-3"><i class="fas fa-video"></i> New Meeting</button>
+                </div>
+                
+
+                <div class="chat-input-2">
+                  <input type="text" class="form-control mt-3" id="room-code" placeholder="Enter the room code">
+                  <button class="btn btn-light mt-3 ml-2" disabled>Join</button>
+                </div>
+                
+            </div>
+          </div>
+          
+
+        </div>
+
+        <div class="col-sm-12 col-lg-6 mt-3 text-center">
+          <div class="banner-container-1">
+            <img src="images/meeting.png" class="home-banner-img">
+          </div>
+         
+        </div>
+      </div>
+    </div>
+</body>
+</html>

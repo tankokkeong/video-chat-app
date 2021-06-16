@@ -1,0 +1,35 @@
+.banner-container{
+    padding: 50px;
+}
+
+#room-code{
+    width: 200px;
+}
+
+.home-banner-img{
+    width: 100%;
+    max-width: 512px;
+}
+
+.chat-input-2{
+    display: flex;
+}
+
+
+@media(min-width:850px)
+{
+    .chat-input-container{
+        display: flex;
+    }
+
+    #room-code{
+        margin-left: 20px!important;
+    }
+}
+
+@media (min-width:1400px)
+{
+    .banner-container-1{
+        padding: 100px;
+    }
+}

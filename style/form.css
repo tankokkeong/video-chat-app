@@ -1,0 +1,25 @@
+.form-container{
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.form-box{
+    width: 70%;
+    position:absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgb(211, 211, 211);
+}
+
+.form-input-container{
+    padding: 20px;
+}
+
+@media (min-width: 850px)
+{
+    .form-box{
+        width: 500px;
+    }
+}
