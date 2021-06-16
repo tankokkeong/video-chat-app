@@ -17,6 +17,34 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style/home.css">
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDYK5Bw_IvWacbiezxxnP8-G-NNOrAWrFc",
+        authDomain: "video-chat-app-fb3dc.firebaseapp.com",
+        projectId: "video-chat-app-fb3dc",
+        storageBucket: "video-chat-app-fb3dc.appspot.com",
+        messagingSenderId: "748914306404",
+        appId: "1:748914306404:web:d70a0f1cabff3721421e71"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      const firestore = firebase.firestore();
+    </script>
+
+    <!-- Javascript -->
+    <script src="script/main.js"></script>
+
+    
+
     <title>Firebase Video Chat App</title>
 </head>
 
@@ -50,13 +78,13 @@
             
             <div class="chat-input-container">
                 <div class="chat-input-1">
-                  <button class="btn btn-primary text-white mt-3"><i class="fas fa-video"></i> New Meeting</button>
+                  <button class="btn btn-primary text-white mt-3" onclick="createNewRoom()"><i class="fas fa-video"></i> New Meeting</button>
                 </div>
                 
 
                 <div class="chat-input-2">
-                  <input type="text" class="form-control mt-3" id="room-code" placeholder="Enter the room code">
-                  <button class="btn btn-light mt-3 ml-2" disabled>Join</button>
+                  <input type="text" class="form-control mt-3" id="room-code" placeholder="Enter the room code" onkeyup="joinRoom()">
+                  <button class="btn btn-light mt-3 ml-2" disabled id="join-room-btn">Join</button>
                 </div>
                 
             </div>
