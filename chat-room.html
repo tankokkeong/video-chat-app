@@ -22,6 +22,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -29,12 +30,12 @@
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-        apiKey: "AIzaSyDYK5Bw_IvWacbiezxxnP8-G-NNOrAWrFc",
-        authDomain: "video-chat-app-fb3dc.firebaseapp.com",
-        projectId: "video-chat-app-fb3dc",
-        storageBucket: "video-chat-app-fb3dc.appspot.com",
-        messagingSenderId: "748914306404",
-        appId: "1:748914306404:web:d70a0f1cabff3721421e71"
+            apiKey: "AIzaSyCP2XDBzCqbs3cx0YCFXvmzvyDburd-DNc",
+            authDomain: "video-chat-app-bf8bd.firebaseapp.com",
+            projectId: "video-chat-app-bf8bd",
+            storageBucket: "video-chat-app-bf8bd.appspot.com",
+            messagingSenderId: "277090442992",
+            appId: "1:277090442992:web:0c51c6ddceb411e5c2ac35"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -46,16 +47,44 @@
     <script src="script/room.js"></script>
     <script src="script/main.js"></script>
 
-    <script>
-        //Check valid room
-        getRoomId();
-    </script>
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title>Chat Room</title>
 </head>
 <body>
     <div class="chatroom-container">
         <div class="meeting-screen bg-dark">
+            <div class="webcam-container">
+                
+                <div class="webcam-row row">
+                    <div class="webcam-col col-sm-6 mt-2">
+                        <div class="attendees-webcam">
+
+                        </div>
+                    </div>
+
+                    <div class="webcam-col col-sm-6 mt-2">
+                        <div class="attendees-webcam">
+
+                        </div>
+                    </div>
+
+                    <div class="webcam-col col-sm-6 mt-2">
+                        <div class="attendees-webcam">
+
+                        </div>
+                    </div>
+
+                    <div class="webcam-col col-sm-6 mt-2">
+                        <div class="attendees-webcam">
+
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
             <div class="room-details bg-white">
                 <div class="row room-details-row">
                     <div class="col room-details-div bg-nav-selected" id="people-nav" onclick="roomNavbar('people-nav')">
@@ -91,11 +120,9 @@
                             <i class="fas fa-user-plus"></i> Add People
                         </div>
 
-                        <div class="attendees-row">
-                            <div>
-                                
-                            </div>
-                            <div class="attendees-info">
+                        <div class="attendees-row" id="attendees-row-display">
+
+                            <!-- <div class="attendees-info">
                                 <div class="attendees-video">
                                     <img src="images/attendees-video.PNG" alt="">
                                 </div>
@@ -103,93 +130,16 @@
                                 <div class="attendees-name">
                                     John Doe
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="attendees-info">
-                                <div class="attendees-video">
-                                    <img src="images/attendees-video.PNG" alt="">
-                                </div>
-
-                                <div class="attendees-name">
-                                    Jane Doe
-                                </div>
-                            </div>
-
-                            <div class="attendees-info">
-                                <div class="attendees-video">
-                                    <img src="images/attendees-video.PNG" alt="">
-                                </div>
-
-                                <div class="attendees-name">
-                                    Timmy
-                                </div>
-                            </div>
-                            <div class="attendees-info">
-                                <div class="attendees-video">
-                                    <img src="images/attendees-video.PNG" alt="">
-                                </div>
-
-                                <div class="attendees-name">
-                                    John Doe
-                                </div>
-                            </div>
-
-                            <div class="attendees-info">
-                                <div class="attendees-video">
-                                    <img src="images/attendees-video.PNG" alt="">
-                                </div>
-
-                                <div class="attendees-name">
-                                    Jane Doe
-                                </div>
-                            </div>
-
-                            <div class="attendees-info">
-                                <div class="attendees-video">
-                                    <img src="images/attendees-video.PNG" alt="">
-                                </div>
-
-                                <div class="attendees-name">
-                                    Timmy
-                                </div>
-                            </div>
-
-                            <div class="attendees-info">
-                                <div class="attendees-video">
-                                    <img src="images/attendees-video.PNG" alt="">
-                                </div>
-
-                                <div class="attendees-name">
-                                    John Doe
-                                </div>
-                            </div>
-
-                            <div class="attendees-info">
-                                <div class="attendees-video">
-                                    <img src="images/attendees-video.PNG" alt="">
-                                </div>
-
-                                <div class="attendees-name">
-                                    Jane Doe
-                                </div>
-                            </div>
-
-                            <div class="attendees-info">
-                                <div class="attendees-video">
-                                    <img src="images/attendees-video.PNG" alt="">
-                                </div>
-
-                                <div class="attendees-name">
-                                    Timmy
-                                </div>
-                            </div>
+                          
 
                         </div>
                     </div>
 
                     <div class="attendees-chat" style="display:none" id="chat-list">
-                        <div class="chat-record">
-                            <div class="chat-message">
+                        <div class="chat-record" id="chat-record-display">
+                            <!-- <div class="chat-message">
                                 <div class="sender-name">
                                     John Doe
                                     <span class="ml-2 sender-time text-secondary">10:20</span>
@@ -209,78 +159,15 @@
                                 <div class="sender-message">
                                     Hi, I am john doe
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="chat-message">
-                                <div class="sender-name">
-                                    John Doe
-                                    <span class="ml-2 sender-time text-secondary">10:20</span>
-                                </div>
+                    
 
-                                <div class="sender-message">
-                                    Hi, I am john doe
-                                </div>
-                            </div>
-
-                            <div class="chat-message">
-                                <div class="sender-name">
-                                    John Doe
-                                    <span class="ml-2 sender-time text-secondary">10:20</span>
-                                </div>
-
-                                <div class="sender-message">
-                                    Hi, I am john doe
-                                </div>
-                            </div>
-
-                            <div class="chat-message">
-                                <div class="sender-name">
-                                    John Doe
-                                    <span class="ml-2 sender-time text-secondary">10:20</span>
-                                </div>
-
-                                <div class="sender-message">
-                                    Hi, I am john doe
-                                </div>
-                            </div>
-
-                            <div class="chat-message">
-                                <div class="sender-name">
-                                    John Doe
-                                    <span class="ml-2 sender-time text-secondary">10:20</span>
-                                </div>
-
-                                <div class="sender-message">
-                                    Hi, I am john doe
-                                </div>
-                            </div>
-
-                            <div class="chat-message">
-                                <div class="sender-name">
-                                    John Doe
-                                    <span class="ml-2 sender-time text-secondary">10:20</span>
-                                </div>
-
-                                <div class="sender-message">
-                                    Hi, I am john doe
-                                </div>
-                            </div>
-
-                            <div class="chat-message">
-                                <div class="sender-name">
-                                    John Doe
-                                    <span class="ml-2 sender-time text-secondary">10:20</span>
-                                </div>
-
-                                <div class="sender-message">
-                                    Hi, I am john doe
-                                </div>
-                            </div>
 
                         </div>
 
                         <div class="chat-input">
-                            <input type="text" class="chat-message-input" placeholder="Enter your message here">
+                            <input type="text" class="chat-message-input" placeholder="Enter your message here" id="message-input" onkeyup="enterSendChatMessage()">
                         </div>
                     </div>
                 </div>
@@ -294,7 +181,10 @@
         <div class="meeting-details bg-light">
             <div class="meeting-details-row">
                 <div class="text-center details-row details-row-1">
-                    <span>Meeting Details <i class="fas fa-chevron-up ml-2"></i></span>
+                    <div class="meeting-details-container rounded-pill" id="room-code-container">
+                        Room Code: 12345
+                    </div>
+                    <span class="details-trigger" id="details-trigger">Meeting Details <i class="fas fa-chevron-up ml-2"></i></span>
                 </div>
 
                 <div class="details-row details-row-2 text-center">
@@ -311,3 +201,20 @@
     </div>
 </body>
 </html>
+
+<script>
+    //Check valid room
+    checkRoomId();
+
+    //Check Sign In
+    checkSignIn();
+
+    //Display Attendees
+    displayAttendees();
+
+    //Display Chat Record
+    displayChatRecord();
+
+    //Leave room function
+    leaveRoom();
+</script>

@@ -107,6 +107,7 @@
 .chat-record{
     height: 90%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .chat-input{
@@ -131,15 +132,53 @@
 
 .chat-message{
     padding: 15px 20px;
+    width: 100%;
 }
 
 .bg-nav-selected{
     background-color: rgb(236, 233, 233);
 }
 
+.attendees-webcam{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.webcam-container{
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 70px);
+}
+
+.webcam-row{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.meeting-details-container{
+    position: absolute;
+    bottom: 80px;
+    background-color: white;
+    padding: 10px;
+}
+
+#room-code-container{
+    display: none;
+}
+
+.details-trigger{
+    cursor: pointer;
+}
+
 @media (min-width:850px)
 {
     .room-details{
         display: block;
+    }
+
+    .webcam-container{
+        width: calc(100% - 300px);
     }
 }

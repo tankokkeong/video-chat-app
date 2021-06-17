@@ -1,4 +1,10 @@
-function joinRoom()
+//Global variables
+let current_user_id = "";
+let current_username = "";
+let current_user_email = "";
+let checked_login = false;
+
+function joinRoomEnabled()
 {
     var room_code_input = document.getElementById("room-code").value;
     var join_btn = document.getElementById("join-room-btn");
@@ -13,52 +19,78 @@ function joinRoom()
     }
 }
 
-function createNewRoom()
+function enterJoinRoom()
 {
-    var roomDoc = firestore.collection("rooms").doc();
-    var room_loader = document.getElementById("room-loader");
-
-    //Display loader
-    room_loader.style.display = "";
-
-    roomDoc.set({
-        room_id : roomDoc.id
-    }).then(() =>
-        {
-            //Redirect to the room page
-            window.location.href = "chat-room.html?" + roomDoc.id;
-        }    
-    );
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        joinRoom();
+    }
 }
 
-function getRoomId()
+function joinRoom()
 {
-    var room_id = window.location.href.split("?")[1];
+    var room_code_input = document.getElementById("room-code").value;
+    var roomDoc = firestore.collection("rooms").doc(room_code_input);
 
-    if(room_id == null || room_id == "")
-    {
-        //Redirect to home page
-        window.location.href = "index.html";
-    }
-    else
-    {
-        var RoomRef = firestore.collection("rooms").doc(room_id);
-
-        RoomRef.get().then((doc) => {
-            if (!doc.exists) {
-                //Redirect to home page if room doesnt exist
-                window.location.href = "index.html";
+    if(checked_login == true){
+        roomDoc.get().then((doc) => {
+            if (doc.exists) {
+    
+                var attendeesRef = firebase.database().ref("rooms/" + roomDoc.id + "/attendees/" + current_user_id);
+    
+                //add new user to the room
+                attendeesRef.set({
+                    user_email : current_user_email,
+                    username: current_username
+                }).then(() => {
+                    //Redirect to the room page
+                    window.location.href = "chat-room.html?" + room_code_input;
+                });
             }
-            else
-            {
-                return room_id;
-            }
+    
+            console.log("success")
         }).catch((error) => {
             console.log("Error getting document:", error);
         });
     }
+    else
+    {
+        alert("Please login first!");
+    }
 
-    return "";
+}
+
+function createNewRoom()
+{
+    var roomDoc = firestore.collection("rooms").doc();
+    var room_loader = document.getElementById("room-loader");
+    var attendeesRef = firebase.database().ref("rooms/" + roomDoc.id + "/attendees/" + current_user_id);
+
+    if(checked_login == true)
+    {
+        //Display loader
+        room_loader.style.display = "";
+
+        roomDoc.set({
+            room_id : roomDoc.id,
+            
+        }).then(() =>
+            {
+                attendeesRef.set({
+                    username: current_username,
+                    user_email: current_user_email
+                }).then(() => {
+                    //Redirect to the room page
+                    window.location.href = "chat-room.html?" + roomDoc.id;
+                })
+            }    
+        );
+    }
+    else
+    {
+        alert("Please login first!");
+    }
+    
 }
 
 function checkSignIn()
@@ -69,11 +101,23 @@ function checkSignIn()
     firebase.auth().onIdTokenChanged(function(user) {
         if (user) {
             // User is signed in or token was refreshed.
-            user_status.innerHTML = '<button class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sign Out</button>';
+            checked_login = true;
+
+            if(user_status != null)
+            {
+                user_status.innerHTML = '<button type="button" class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sign Out</button>';
+            }
+           
+            current_user_id = user.uid;
+
+            //Get User Info
+            getUserInfo(current_user_id);
         }
         else
         {
-           user_status.innerHTML = '<a href="login.html" class="text-decoration-none text-dark"><i class="fas fa-sign-in-alt"></i> Sign In</a>';
+            if(user_status != null){
+                user_status.innerHTML = '<a href="login.html" class="text-decoration-none text-dark"><i class="fas fa-sign-in-alt"></i> Sign In</a>';
+            }
         }
     });
 
@@ -81,5 +125,38 @@ function checkSignIn()
 
 function logout()
 {
-    firebase.auth().signOut();
+    var user_id = firebase.auth().currentUser.uid;
+  
+
+    //Update user presence status
+    firebase.database().ref("presenceStatus/" + user_id).set({
+        presence_status : "Offline"
+    }).then(()=>{
+        //Logout account
+        firebase.auth().signOut();
+
+        checked_login = false;
+    });
+
+
+}
+
+
+function getUserInfo(user_id)
+{
+    var UserRef = firestore.collection("users").doc(user_id);
+
+    UserRef.get().then((doc) => {
+        if (doc.exists) {
+            //Assign user info to the global variables
+            current_user_id = user_id;
+            current_username = doc.data().username;
+            current_user_email = doc.data().user_email;
+        }
+
+        console.log("success")
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+
 }

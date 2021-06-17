@@ -95,8 +95,16 @@ function login()
     {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
-            // Signed in 
-            window.location.href = "index.html";
+            var user_id = firebase.auth().currentUser.uid;
+
+            //Update user presence status
+            firebase.database().ref("presenceStatus/" + user_id).set({
+                presence_status : "Online"
+            }).then(() => {
+                // Signed in 
+                window.location.href = "index.html";
+            });
+           
         })
         .catch((error) => {
             // var errorCode = error.code;
@@ -105,6 +113,7 @@ function login()
             //Remove loader
             login_loader.style.display = "none";
 
+            console.log(error.message)
             // Display error
             error_prompt.innerHTML = "Invalid username or password!";
         });
