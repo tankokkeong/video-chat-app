@@ -16,6 +16,34 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="style/form.css">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDYK5Bw_IvWacbiezxxnP8-G-NNOrAWrFc",
+        authDomain: "video-chat-app-fb3dc.firebaseapp.com",
+        projectId: "video-chat-app-fb3dc",
+        storageBucket: "video-chat-app-fb3dc.appspot.com",
+        messagingSenderId: "748914306404",
+        appId: "1:748914306404:web:d70a0f1cabff3721421e71"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      const firestore = firebase.firestore();
+    </script>
+
+    <!-- Javascript -->
+    <script src="script/form.js"></script>
+
     <title>Sign in</title>
 </head>
 <body class="bg-light">
