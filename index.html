@@ -44,8 +44,6 @@
     <!-- Javascript -->
     <script src="script/main.js"></script>
 
-    
-
     <title>Firebase Video Chat App</title>
 </head>
 
@@ -62,7 +60,7 @@
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <div id="check-signin">
-                <a href="login.html" class="text-decoration-none text-dark"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                <!-- <a href="login.html" class="text-decoration-none text-dark"><i class="fas fa-sign-in-alt"></i> Sign In</a> -->
             </div>
           </form>
         </div>
@@ -89,6 +87,11 @@
                 </div>
                 
             </div>
+
+            <div class="text-primary mt-2" id="room-loader" role="status" style="display: none;">
+                <span class="ml-1 spinner-border spinner-border-sm"></span>
+                Loading...
+            </div>
           </div>
           
 
@@ -104,3 +107,8 @@
     </div>
 </body>
 </html>
+
+<script>
+  //Check Sign In
+  checkSignIn();
+</script>

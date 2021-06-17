@@ -16,6 +16,10 @@ function joinRoom()
 function createNewRoom()
 {
     var roomDoc = firestore.collection("rooms").doc();
+    var room_loader = document.getElementById("room-loader");
+
+    //Display loader
+    room_loader.style.display = "";
 
     roomDoc.set({
         room_id : roomDoc.id
@@ -55,4 +59,27 @@ function getRoomId()
     }
 
     return "";
+}
+
+function checkSignIn()
+{
+    var user_status = document.getElementById("check-signin");
+
+    // Check Login
+    firebase.auth().onIdTokenChanged(function(user) {
+        if (user) {
+            // User is signed in or token was refreshed.
+            user_status.innerHTML = '<button class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sign Out</button>';
+        }
+        else
+        {
+           user_status.innerHTML = '<a href="login.html" class="text-decoration-none text-dark"><i class="fas fa-sign-in-alt"></i> Sign In</a>';
+        }
+    });
+
+}
+
+function logout()
+{
+    firebase.auth().signOut();
 }
