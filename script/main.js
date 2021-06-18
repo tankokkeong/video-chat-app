@@ -73,6 +73,9 @@ function joinRoom()
     }
     else
     {
+        //Remove loader
+        room_loader.style.display = "none";
+        
         alert("Please login first!");
     }
 

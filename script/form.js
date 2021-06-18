@@ -120,3 +120,19 @@ function login()
     }
     
 }
+
+function enterLogin()
+{
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        login();
+    }
+}
+
+function enterSignUp()
+{
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        signup();
+    }
+}
