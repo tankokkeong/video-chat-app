@@ -31,6 +31,14 @@ function joinRoom()
 {
     var room_code_input = document.getElementById("room-code").value;
     var roomDoc = firestore.collection("rooms").doc(room_code_input);
+    var room_error = document.getElementById("room-error-prompt");
+    var room_loader = document.getElementById("room-loader");
+
+    //Display loader
+    room_loader.style.display = "";
+
+    //Remove error prompt
+    room_error.innerHTML = "";
 
     if(checked_login == true){
         roomDoc.get().then((doc) => {
@@ -46,6 +54,16 @@ function joinRoom()
                     //Redirect to the room page
                     window.location.href = "chat-room.html?" + room_code_input;
                 });
+            }
+            else
+            {
+                //If no room found
+
+                //Remove loader
+                room_loader.style.display = "none";
+
+                //Display error
+                room_error.innerHTML = "No Room Found!";
             }
     
             console.log("success")
