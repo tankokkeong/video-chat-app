@@ -201,3 +201,20 @@ function leaveRoom()
     });
 
 }
+
+function roomCheckedLogin()
+{
+    // Check Login
+    firebase.auth().onIdTokenChanged(function(user) {
+        if (user) {
+           //Get User Info
+           console.log(user.uid)
+           getUserInfo(user.uid);
+        }
+        else
+        {
+            //Redirect to home page
+            window.location.href = "index.html";
+        }
+    });
+}
